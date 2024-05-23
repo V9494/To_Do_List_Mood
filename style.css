@@ -1,0 +1,682 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.container {
+  background-image: linear-gradient(to right, #1296e2 0%, #fee140 100%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-card {
+  background-color: white;
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.6rem;
+  gap: 1rem;
+  position: relative;
+  border-radius: 20px;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.6rem;
+}
+
+.title > h1 {
+  font-size: 27px;
+  font-weight: 600;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+#header {
+  width: 100%;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+  background: #dad7d7;
+  border-radius: 20px;
+}
+
+#header #input {
+  flex: 1;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: black;
+  padding: 0.567rem;
+  outline: none;
+}
+
+#header #Add-Task {
+  border: none;
+  width: 7rem;
+  font-size: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #fe6910fc;
+  color: white;
+  font-weight: 800;
+  height: 2rem;
+}
+
+.record-data {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #a2098a;
+  margin-bottom: -25px;
+}
+
+.all-tasks {
+  display: flex;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  gap: 21px;
+}
+
+.todo-list-container {
+  height: 100%;
+  max-height: 600px;
+  overflow-y: auto;
+  width: 96%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: unset;
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+.list-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 17px;
+  padding: 11px;
+  background: #dad7d7;
+  border-radius: 8px;
+  height: 7%;
+  width: 98%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.list-cards #checkbox {
+  cursor: pointer;
+}
+
+.all-tasks > p {
+  text-align: left;
+  font-size: 20px;
+}
+
+.delete {
+  border: none;
+  height: 2rem;
+  width: 4rem;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ff0000fc;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.list-cards > p {
+  max-width: 82%;
+  max-height: 80%;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: #2903037a;
+}
+
+.chekedimage {
+  height: 2rem;
+  width: 2rem;
+  background: url("checked.png");
+  background-size: cover;
+  cursor: pointer;
+}
+
+.uncheckeimage {
+  height: 2rem;
+  width: 2rem;
+  background: url("unchecked.png");
+  background-size: cover;
+  cursor: pointer;
+}
+
+.edit-modal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(3px);
+}
+
+.open {
+  opacity: 1;
+}
+
+.edit-input {
+  flex: 1;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: black;
+  padding: 0.567rem;
+  outline: none;
+}
+
+.confirm-task {
+  border: none;
+  width: 7rem;
+  font-size: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #fe6910fc;
+  color: white;
+  font-weight: 800;
+  height: 2rem;
+}
+
+.card {
+  width: 41%;
+  padding: 2px;
+  border-radius: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(9px 4px 6px #111);
+  background-color: white;
+}
+
+.edit-emoji {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.16);
+  opacity: 1;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(3px);
+  flex-direction: column;
+  transition: all ease-in-out 0.2;
+}
+
+.edit-emoji > h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.emoji-card {
+  width: 41%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  filter: drop-shadow(9px 4px 6px #111);
+  background-color: white;
+  height: 10rem;
+  border-radius: 10px;
+}
+
+.emoji-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffd8b5;
+  height: 85%;
+  width: 17%;
+  gap: 4px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 8px 4px 11px #ffa800ab;
+  border: 1px solid black;
+  transition: all ease-in 0.5s;
+}
+
+.emoji-container:hover {
+  transform: scale(1.111);
+}
+
+.angry:hover {
+  background-color: rgb(239, 81, 81);
+}
+
+.happy:hover {
+  background-color: #f69c1ea3;
+}
+
+.sad:hover {
+  background-color: #48484857;
+}
+
+.frustrated:hover {
+  background-color: rgb(255, 85, 0);
+}
+
+.easy:hover {
+  background-color: rgb(32, 232, 32);
+}
+
+.emoji-container > h2 {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.emoji-container > p {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.emoji-collection {
+  background: #7f7e7db2;
+  border-radius: 50px;
+  height: 23px;
+  cursor: default;
+}
+
+#user-emoji {
+  filter: drop-shadow(10px 10px 10px orange);
+}
+
+.date-modal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(3px);
+}
+
+.open-date {
+  opacity: 1;
+}
+
+.edit-input {
+  flex: 1;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: black;
+  padding: 0.567rem;
+  outline: none;
+}
+
+.confirm-date {
+  border: none;
+  width: 7rem;
+  font-size: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #fe6910fc;
+  color: white;
+  font-weight: 800;
+  height: 2rem;
+}
+
+.date_card {
+  width: 41%;
+  padding: 2px;
+  border-radius: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(9px 4px 6px #111);
+  background-color: white;
+}
+
+.time-modal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(3px);
+}
+
+.open-time {
+  opacity: 1;
+}
+
+.edit-time {
+  flex: 1;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: black;
+  padding: 0.567rem;
+  outline: none;
+}
+
+.confirm-time {
+  border: none;
+  width: 7rem;
+  font-size: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #9110fefc;
+  color: white;
+  font-weight: 800;
+  height: 2rem;
+}
+
+.time_card {
+  width: 41%;
+  padding: 2px;
+  border-radius: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(1px 4px 0px #9213fe);
+  background-color: white;
+}
+
+.spin-modal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(3px);
+}
+
+.spin-open {
+  opacity: 1;
+}
+
+.loader {
+  height: 13%;
+  width: 6%;
+  background-color: #fff0;
+  border: 5px solid #010101;
+  border-radius: 50px;
+  border-right-color: #2190a2;
+  animation: spin ease 1s infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .todo-card {
+    width: 70%;
+  }
+
+  .title > h1 {
+    font-size: 24px;
+  }
+
+  .todo-list-container {
+    width: 100%;
+  }
+
+  .list-cards > p {
+    font-size: 16px;
+  }
+  .list-cards{
+    width: 92%;
+  }
+}
+
+@media (max-width: 992px) {
+  .todo-card {
+    width: 80%;
+  }
+
+  .title > h1 {
+    font-size: 22px;
+  }
+
+  .all-tasks > p {
+    font-size: 18px;
+  }
+
+  .list-cards > p {
+    font-size: 15px;
+  }
+  .emoji-card{
+    width: 75%;
+  }
+  .emoji-container > h2{
+    font-size: 68px;
+        font-weight: 700;
+    
+  }
+  .emoji-container > p{
+    text-align: center;
+    font-size: 15px;
+  }
+  .list-cards{
+    width: 92%;
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-card {
+    width: 70%;
+  }
+
+  .todo-card .title{
+    width: 100%;
+  }
+  
+  .todo-card .title .imogies{
+    width: 16rem;
+  }
+
+  .todo-card .title .date_show{
+    font-size: 14px;
+        width: 107px;
+  }
+
+  .title > h1 {
+    font-size: 20px;
+    width: 160px;
+  }
+
+  #header #Add-Task {
+    width: 5rem;
+    font-size: 12px;
+  }
+
+  .list-cards {
+    flex-direction: row;
+        gap: 10px;
+        width: 88%
+  }
+
+  .delete {
+    width: 3rem;
+    font-size: 12px;
+  }
+
+  .list-cards > p {
+    font-size: 14px;
+  }
+  .emoji-container{
+    padding: 2px;
+    height: 94px;
+  }
+  .emoji-container > h2{
+    font-size: 50px;
+    font-weight: 700;
+    
+  }
+  .emoji-container > p{
+    text-align: center;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .todo-card {
+    width: 78%;
+  }
+
+  .title{
+    width: 21rem;
+        font-size: 22px;
+        text-align: center;
+  }
+  .all-tasks h4,p {
+    font-size: 15px; 
+  }
+  .title > h1 {
+    font-size: 18px;
+  }
+
+  #header #Add-Task {
+    width: 6rem;
+        font-size: 12px;
+  }
+
+  .list-cards > p {
+    font-size: 13px;
+  }
+  .edit-emoji > h1{
+    font-size: 23px;
+  }
+  .emoji-card{
+    flex-direction: column;
+        height: 84%;
+        background: transparent;
+  }
+  .emoji-container{
+    padding: 2px;
+    height: 109px;
+    width: 9rem;
+  }
+  .emoji-container > h2{
+    font-size: 50px;
+    font-weight: 700;
+    
+  }
+  .emoji-container > p{
+    text-align: center;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title > h1 {
+    font-size: 16px;
+  }
+  .imogies{
+    font-size: 15px;
+  }
+  #header #Add-Task {
+    width: 3.5rem;
+    font-size: 10px;
+  }
+  .date_show{
+    font-size: 10px;
+  }
+
+  .list-cards > p {
+    font-size: 12px;
+  }
+
+  .delete {
+    width: 2.5rem;
+    font-size: 10px;
+  }
+
+  .edit-emoji > h1{
+    font-size: 19px;
+  }
+
+}
+
+@media (max-width: 360px) {
+  .title > h1 {
+    font-size: 14px;
+  }
+
+  #header #Add-Task {
+    width: 3rem;
+    font-size: 9px;
+  }
+
+  .list-cards > p {
+    font-size: 11px;
+  }
+
+  .delete {
+    width: 2rem;
+    font-size: 9px;
+  }
+
+  .edit-emoji > h1{
+    font-size: 14px;
+    font-weight: 900;
+  }
+}
